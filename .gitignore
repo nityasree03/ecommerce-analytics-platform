@@ -1,12 +1,40 @@
-.git
+# Airflow
 .env
-.DS_Store # macOS specific ignore
 airflow_settings.yaml
-__pycache__/
-astro
-.venv
 airflow-webserver.pid
 webserver_config.py
 airflow.cfg
 airflow.db
-include/gcp/
+
+# Astronomer
+.astro/
+
+# dbt — auto-generated output, never commit
+include/dbt/target/
+include/dbt/logs/
+include/dbt/.user.yml
+
+# GCP credentials — NEVER commit real credentials
+include/gcp/service_account.json
+
+# Python
+__pycache__/
+.venv/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# VS Code
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Streamlit
+.streamlit/secrets.toml
