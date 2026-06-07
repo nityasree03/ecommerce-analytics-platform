@@ -1,0 +1,75 @@
+version: 2
+
+sources:
+  - name: olist
+    description: "Raw e-commerce data from the Olist Brazilian marketplace dataset"
+    database: "{{ env_var('GCP_PROJECT_ID') }}"
+    schema: raw
+    tables:
+      - name: raw_orders
+        description: "All orders placed on the Olist marketplace"
+        columns:
+          - name: order_id
+            description: "Unique identifier for each order"
+          - name: customer_id
+            description: "Links to customers table"
+          - name: order_status
+            description: "Current status: delivered, shipped, cancelled, etc"
+
+      - name: raw_customers
+        description: "Customer location and identity data"
+        columns:
+          - name: customer_id
+            description: "Order-specific customer identifier"
+          - name: customer_unique_id
+            description: "True customer identifier across multiple orders"
+
+      - name: raw_order_items
+        description: "Individual items within each order"
+        columns:
+          - name: order_id
+            description: "Links to orders table"
+          - name: product_id
+            description: "Links to products table"
+          - name: seller_id
+            description: "Links to sellers table"
+
+      - name: raw_products
+        description: "Product catalog with categories and dimensions"
+        columns:
+          - name: product_id
+            description: "Unique product identifier"
+
+      - name: raw_sellers
+        description: "Seller location data"
+        columns:
+          - name: seller_id
+            description: "Unique seller identifier"
+
+      - name: raw_payments
+        description: "Payment details per order including installments"
+        columns:
+          - name: order_id
+            description: "Links to orders table"
+
+      - name: raw_reviews
+        description: "Customer review scores and comments"
+        columns:
+          - name: review_id
+            description: "Unique review identifier"
+          - name: order_id
+            description: "Links to orders table"
+
+      - name: raw_geolocation
+        description: "Brazilian zip codes with latitude and longitude"
+        columns:
+          - name: geolocation_zip_code_prefix
+            description: "5-digit zip code prefix"
+
+      - name: raw_product_translations
+        description: "Maps Portuguese product category names to English"
+        columns:
+          - name: product_category_name
+            description: "Category name in Portuguese"
+          - name: product_category_name_english
+            description: "Category name in English"
