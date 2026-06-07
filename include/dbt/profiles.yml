@@ -1,12 +1,22 @@
-retail:
- target: dev
- outputs:
-  dev:
-    type: bigquery
-    method: service-account
-    keyfile: /usr/local/airflow/include/gcp/service_account.json
-    project: onlineretail-project-399501
-    dataset: retail
-    threads: 1
-    timeout_seconds: 300
-    location: US
+olist_ecommerce:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      keyfile: /usr/local/airflow/include/gcp/service_account.json
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: raw
+      threads: 4
+      timeout_seconds: 300
+      location: US
+
+    prod:
+      type: bigquery
+      method: service-account
+      keyfile: /usr/local/airflow/include/gcp/service_account.json
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: raw
+      threads: 8
+      timeout_seconds: 300
+      location: US

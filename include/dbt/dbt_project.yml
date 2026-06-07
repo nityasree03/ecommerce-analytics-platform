@@ -1,7 +1,40 @@
-name: 'retail'
+name: 'olist_ecommerce'
+version: '1.0.0'
+config-version: 2
 
-profile: 'retail'
+profile: 'olist_ecommerce'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
 
 models:
-  retail:
-    materialized: table
+  olist_ecommerce:
+
+    staging:
+      +materialized: view
+      +schema: staging
+      +description: "Staging models — one per source table, type casting and renaming only"
+
+    intermediate:
+      +materialized: table
+      +schema: intermediate
+      +description: "Intermediate models — joins and enrichments reused across marts"
+
+    marts:
+      +materialized: table
+      +schema: marts
+
+      core:
+        +description: "Core dimensional models — star schema fact and dimension tables"
+
+      marketing:
+        +description: "Marketing analytics models — pre-aggregated for dashboard pages"
